@@ -49,7 +49,7 @@ MIDDLEWARE = [
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:3000',  # Add your frontend origin here
     'http://localhost:3000',  # Add if needed
-    'https://clientmanagement-vhtax.onrender.com', #deployed fronted
+    #deployed fronted
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -57,7 +57,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",  # React app origin
     "http://localhost:3000",
-    'https://clientmanagement-vhtax.onrender.com', #deployed fronted
+    #deployed fronted
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -67,11 +67,7 @@ ROOT_URLCONF = 'ecom_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-			'api_management/html_templates',
-
-			'member_management/html_templates',
-		],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,6 +86,10 @@ WSGI_APPLICATION = 'ecom_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# Neo4j settings
+NEO4J_URI = config('NEO4J_URI')
+NEO4J_USER = config('NEO4J_USER')
+NEO4J_PASSWORD = config('NEO4J_PASSWORD')
 
 #ENVIRONMENT VARIABLES WITH DECOUPLE
 DATABASES = {
