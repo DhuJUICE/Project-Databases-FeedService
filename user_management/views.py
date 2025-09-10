@@ -4,8 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .neo4j_utils import get_personalized_feed
 
 @csrf_exempt
-def register_view(request):
-    if request.method == 'POST':
+def feed_view(request):
+    if request.method == 'GET':
         try:
             data = json.loads(request.body)
             username = data.get('username')
@@ -31,6 +31,6 @@ def register_view(request):
             )
     
     return JsonResponse(
-        {"message": "Invalid request method. POST required.", "status": "error"},
+        {"message": "Invalid request method. GET required.", "status": "error"},
         status=405
     )

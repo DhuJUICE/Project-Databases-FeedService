@@ -10,12 +10,12 @@ from rest_framework.permissions import IsAuthenticated
 from user_management.views import *
 
 #API ENDPOINT FOR SIGNUP/REGISTER
-class Register(APIView):
+class Feed(APIView):
     permission_classes = [AllowAny]
 
-    def post(self, request):
+    def get(self, request):
         # Call the regular function
-        response = register_view(request)
+        response = feed_view(request)
 
         # If the other function returns a JsonResponse, return its content as JSON
         if isinstance(response, JsonResponse):
