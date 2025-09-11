@@ -11,9 +11,9 @@ from user_management.views import *
 
 #API ENDPOINT FOR SIGNUP/REGISTER
 class Feed(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
-    def get(self, request):
+    def post(self, request):
         # Call the regular function
         response = feed_view(request)
 

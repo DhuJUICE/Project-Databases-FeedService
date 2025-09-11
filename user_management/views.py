@@ -5,7 +5,7 @@ from .neo4j_utils import get_personalized_feed
 
 @csrf_exempt
 def feed_view(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         try:
             data = json.loads(request.body)
             username = data.get('username')
