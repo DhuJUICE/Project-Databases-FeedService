@@ -14,7 +14,7 @@ def get_personalized_feed(username, limit=40):
 
     query = """
     MATCH (d1:Developer {username: $username})-[:FOLLOWED]->(d2:Developer)-[r:POSTED]->(p:Post)
-    RETURN p.imgUrl AS imgUrl, p.caption AS caption, r.datePosted AS datePosted, d2.username AS author
+    RETURN p.id AS id, p.imgUrl AS imgUrl, p.caption AS caption, r.datePosted AS datePosted, d2.username AS author
     ORDER BY r.datePosted DESC
     LIMIT $limit
     """
