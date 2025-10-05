@@ -1,0 +1,1 @@
+start cmd /k "python manage.py runserver 8001"
