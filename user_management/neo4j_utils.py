@@ -13,11 +13,26 @@ def get_personalized_feed(username, limit=40):
     )
 
     query = """
-    MATCH (d1:Developer {username: $username})-[:FOLLOWED]->(d2:Developer)-[r:POSTED]->(p:Post)
-    RETURN p.id AS id, p.imgUrl AS imgUrl, p.caption AS caption, r.datePosted AS datePosted, d2.username AS author
+    MATCH (user:Developer {username: $username})-[:FOLLOWED]->(author:Developer)-[r:POSTED]->(post:Post)
+    OPTIONAL MATCH (post)-[:CONTAINS]->(c:Comment)<-[:COMMENTED]-(commenter:Developer)
+    OPTIONAL MATCH (user)-[l:LIKED]->(post)
+    WITH post, author, r, COLLECT(DISTINCT {
+        id: c.id,
+        comment: c.comment,
+        author: commenter.username
+    }) AS comments, COUNT(l) > 0 AS likedByCurrentUser
+    RETURN 
+        post.id AS id,
+        post.imgUrl AS imgUrl,
+        post.caption AS caption,
+        r.datePosted AS datePosted,
+        author.username AS author,
+        likedByCurrentUser,
+        comments
     ORDER BY r.datePosted DESC
     LIMIT $limit
     """
+
 
     feed = []
     try:
