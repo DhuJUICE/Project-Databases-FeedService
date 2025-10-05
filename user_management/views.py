@@ -18,7 +18,6 @@ def feed_view(request):
             
             # Get the personalized feed from Neo4j
             feed = get_personalized_feed(username)
-            print("FEED RESPONSE:", feed)
             return JsonResponse(
                 {"message": "Feed fetched successfully!", "status": "success", "feed": feed},
                 status=200
